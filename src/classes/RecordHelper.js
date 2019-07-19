@@ -7,15 +7,18 @@ export default class RecorderHelper {
     });
   }
 
-  async startRecording() {
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async startRecording(sec) {
     await this.recorder.initAudio();
     await this.recorder.initWorker();
     this.recorder.startRecording();
-  }
 
-  async stopRecording() {
+    await this.sleep(sec * 1000);
+
     const blob = await this.recorder.stopRecording();
-
     return URL.createObjectURL(blob);
   }
 }
