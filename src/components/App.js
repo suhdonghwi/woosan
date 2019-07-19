@@ -35,8 +35,6 @@ export default class App extends React.Component {
           return;
         }
       }
-
-      this.startRecognition();
     });
   }
 

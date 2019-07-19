@@ -1,6 +1,7 @@
 export default class Recognizer {
   constructor() {
     this.transcript = "";
+    this.lastStartedAt = 0;
 
     const Recognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -20,10 +21,12 @@ export default class Recognizer {
     };
   }
 
-  start(onResult) {
+  start(onEnd) {
     if (this.listening) {
       return;
     }
+
+    this.lastStartedAt = new Date().getTime();
 
     this.recognition.start();
 
@@ -34,7 +37,15 @@ export default class Recognizer {
     };
 
     this.recognition.onend = event => {
-      onResult(this.transcript);
+      onEnd(this.transcript);
+      const timeSinceLast = new Date().getTime() - this.lastStartedAt;
+      if (timeSinceLast < 1000) {
+        setTimeout(function() {
+          this.start(onEnd);
+        }, 1000 - timeSinceLast);
+      } else {
+        this.start(onEnd);
+      }
     };
   }
 }
