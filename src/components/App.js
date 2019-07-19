@@ -18,8 +18,27 @@ export default class App extends React.Component {
     this.recorder.startRecording();
   }
 
+  downloadFile(blob, fileName) {
+    const link = document.createElement("a");
+    // create a blobURI pointing to our Blob
+    link.href = blob;
+    link.download = fileName;
+    // some browser needs the anchor to be in the doc
+    document.body.append(link);
+    link.click();
+    link.remove();
+    // in case the Blob uses a lot of memory
+    window.addEventListener("focus", e => URL.revokeObjectURL(link.href), {
+      once: true
+    });
+  }
+
   async stopRecognition() {
-    console.log(await this.recorder.stopRecording());
+    const currentDate = new Date();
+    this.downloadFile(
+      await this.recorder.stopRecording(),
+      currentDate.toTimeString() + ".mp3"
+    );
   }
 
   render() {
