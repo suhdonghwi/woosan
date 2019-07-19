@@ -4,11 +4,11 @@ import KeywordList from "./KeywordList";
 import KeywordData from "./KeywordData";
 
 export default class KeywordForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      keywords: [new KeywordData("asdf")],
+      keywords: this.props.keywords,
       keywordInput: ""
     };
 
@@ -18,18 +18,24 @@ export default class KeywordForm extends React.Component {
   }
 
   onRemove(id) {
-    this.setState({
-      keywords: this.state.keywords.filter(keyword => keyword.id !== id)
-    });
+    this.setState(
+      {
+        keywords: this.state.keywords.filter(keyword => keyword.id !== id)
+      },
+      () => this.props.onUpdate(this.state.keywords)
+    );
   }
 
   handleKeyDown(event) {
     if (event.key === "Enter") {
       const newData = new KeywordData(this.state.keywordInput);
-      this.setState({
-        keywords: this.state.keywords.concat(newData),
-        keywordInput: ""
-      });
+      this.setState(
+        {
+          keywords: this.state.keywords.concat(newData),
+          keywordInput: ""
+        },
+        () => this.props.onUpdate(this.state.keywords)
+      );
     }
   }
 
