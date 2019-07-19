@@ -8,10 +8,13 @@ export default class KeywordForm extends React.Component {
     super();
 
     this.state = {
-      keywords: [new KeywordData("asdf")]
+      keywords: [new KeywordData("asdf")],
+      keywordInput: ""
     };
 
     this.onRemove = this.onRemove.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   onRemove(id) {
@@ -20,9 +23,33 @@ export default class KeywordForm extends React.Component {
     });
   }
 
+  handleKeyDown(event) {
+    if (event.key === "Enter") {
+      const newData = new KeywordData(this.state.keywordInput);
+      this.setState({
+        keywords: this.state.keywords.concat(newData),
+        keywordInput: ""
+      });
+    }
+  }
+
+  handleChange(event) {
+    this.setState({
+      keywordInput: event.target.value
+    });
+  }
+
   render() {
     return (
-      <KeywordList keywords={this.state.keywords} onRemove={this.onRemove} />
+      <>
+        <KeywordList keywords={this.state.keywords} onRemove={this.onRemove} />
+        <input
+          type="text"
+          onKeyDown={this.handleKeyDown}
+          onChange={this.handleChange}
+          value={this.state.keywordInput}
+        />
+      </>
     );
   }
 }
