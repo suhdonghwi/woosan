@@ -1,5 +1,7 @@
 export default class Recognizer {
   constructor() {
+    this.listening = false;
+
     const Recognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -19,9 +21,16 @@ export default class Recognizer {
   }
 
   start(onResult) {
+    if (this.listening) {
+      return;
+    }
+
     this.recognition.start();
+    this.listening = true;
 
     this.recognition.onresult = event => {
+      this.listening = false;
+
       const text = event.results[0][0].transcript;
       console.log("인식 : ", text);
       onResult(text);
