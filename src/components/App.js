@@ -46,6 +46,8 @@ export default class App extends React.Component {
     this.startRecognition = this.startRecognition.bind(this);
     this.onKeywordUpdate = this.onKeywordUpdate.bind(this);
 
+    this.realEmergency = this.realEmergency.bind(this);
+
     this.emergencySender = new EmergencySender();
 
     this.startRecognition();
@@ -86,10 +88,18 @@ export default class App extends React.Component {
     });
   }
 
+  async realEmergency() {
+    this.emergencySender.send("가은님이 위험에 처했습니다.");
+
+    const blob = await this.recorder.startRecording(5);
+    this.downloadFile(blob, new Date().toDateString());
+    return;
+  }
+
   render() {
     return (
       <Container className="App">
-        <Logo src={logo} />
+        <Logo src={logo} onClick={this.realEmergency} />
         <Subtitle>To prevent further rain</Subtitle>
         <KeywordForm
           keywords={this.state.keywords}
