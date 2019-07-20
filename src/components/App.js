@@ -27,6 +27,9 @@ const Logo = styled.img`
 
 const Subtitle = styled.span`
   color: #707070;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.9rem;
 `;
 
 export default class App extends React.Component {
@@ -44,6 +47,8 @@ export default class App extends React.Component {
     this.onKeywordUpdate = this.onKeywordUpdate.bind(this);
 
     this.emergencySender = new EmergencySender();
+
+    this.startRecognition();
   }
 
   startRecognition() {
@@ -90,7 +95,6 @@ export default class App extends React.Component {
           keywords={this.state.keywords}
           onUpdate={this.onKeywordUpdate}
         />
-        <button onClick={this.startRecognition}>멈춰봐요</button>
       </Container>
     );
   }

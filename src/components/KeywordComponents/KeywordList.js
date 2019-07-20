@@ -1,9 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 
 import KeywordItem from "./KeywordItem";
 
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`;
+
 const KeywordList = ({ keywords, onRemove }) => (
-  <ul>
+  <List>
     {keywords.map(keyword => (
       <KeywordItem
         key={keyword.id}
@@ -11,7 +18,7 @@ const KeywordList = ({ keywords, onRemove }) => (
         onRemove={() => onRemove(keyword.id)}
       />
     ))}
-  </ul>
+  </List>
 );
 
 export default KeywordList;
