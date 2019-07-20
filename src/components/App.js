@@ -1,11 +1,33 @@
 import React from "react";
+import styled from "styled-components";
+
+import logo from "../assets/logo.png";
 
 import Recognizer from "../classes/Recognizer";
 import RecordHelper from "../classes/RecordHelper";
 
 import KeywordForm from "./KeywordComponents/KeywordForm";
-
 import EmergencySender from "./EmergencySender";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+`;
+
+const Logo = styled.img`
+  border-radius: 100%;
+
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+
+  height: 6rem;
+`;
+
+const Subtitle = styled.span`
+  color: #707070;
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -61,13 +83,15 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <Container className="App">
+        <Logo src={logo} />
+        <Subtitle>To prevent further rain</Subtitle>
         <KeywordForm
           keywords={this.state.keywords}
           onUpdate={this.onKeywordUpdate}
         />
         <button onClick={this.startRecognition}>멈춰봐요</button>
-      </div>
+      </Container>
     );
   }
 }
