@@ -26,8 +26,7 @@ export default class EmergencySender {
             title: "우산",
             body: body,
             sound: "default",
-            click_action: "FCM_PLUGIN_ACTIVITY",
-            icon: "fcm_push_icon"
+            icon: "ic_stat_name"
           },
           priority: "high",
           restricted_package_name: "com.example.woosan",

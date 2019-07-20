@@ -30,7 +30,7 @@ export default class App extends React.Component {
         if (text.replace(/ /g, "").includes(this.state.keywords[i].content)) {
           this.emergencySender.send("가은님이 위험에 처했습니다.");
 
-          const blob = await this.recorder.startRecording(10);
+          const blob = await this.recorder.startRecording(5);
           this.downloadFile(blob, new Date().toDateString());
           return;
         }

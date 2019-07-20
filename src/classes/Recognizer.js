@@ -38,9 +38,10 @@ export default class Recognizer {
 
     this.recognition.onend = event => {
       onEnd(this.transcript);
+      this.transcript = "";
       const timeSinceLast = new Date().getTime() - this.lastStartedAt;
       if (timeSinceLast < 1000) {
-        setTimeout(function() {
+        setTimeout(() => {
           this.start(onEnd);
         }, 1000 - timeSinceLast);
       } else {
