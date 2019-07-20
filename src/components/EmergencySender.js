@@ -2,10 +2,9 @@ import FCM from "fcm-push";
 
 export default class EmergencySender {
   constructor() {
-    this.serverKey =
-      "AAAAopVgHyg:APA91bHEp3FkFdeWYlqUEs4wx3PQJuIoOuE5z5_VDdDsF03u9k-t4pyI4LBIVHLn2EvyDAtmQj8Y73j0Wro_5J5qcD9cy8JAqab1tI4tfBSwY-8pb6NwCigW2hVD3f-JUoqQxfrTjk6n";
-    this.clientKey =
-      "dqE0kxtn3kM:APA91bFHvX0yhOIXWKhZL_esdy2KS-r3jKrxj2HeCVzR2JFlXQ-0QMaimLNur9_W7s1jNKRA1s8GsG5ByK6bqKS460LdeWJN71Dumu5VfCtWZUGnKq2igVnSNBHA_vPinIL2ZtSq55jZ";
+    // You need to set these to actually run woosan
+    this.serverKey = "";
+    this.clientKey = "";
 
     this.fcm = new FCM(this.serverKey);
   }

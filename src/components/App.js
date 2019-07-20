@@ -57,7 +57,7 @@ export default class App extends React.Component {
     this.recognizer.start(async text => {
       for (var i = 0; i < this.state.keywords.length; i++) {
         if (text.replace(/ /g, "").includes(this.state.keywords[i].content)) {
-          this.emergencySender.send("가은님이 위험에 처했습니다.");
+          this.emergencySender.send("OO님이 위험에 처했습니다.");
 
           const blob = await this.recorder.startRecording(5);
           this.downloadFile(blob, new Date().toDateString());
@@ -89,7 +89,7 @@ export default class App extends React.Component {
   }
 
   async realEmergency() {
-    this.emergencySender.send("가은님이 위험에 처했습니다.");
+    this.emergencySender.send("OO님이 위험에 처했습니다.");
 
     const blob = await this.recorder.startRecording(5);
     this.downloadFile(blob, new Date().toDateString());
