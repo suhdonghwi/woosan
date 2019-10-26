@@ -30,6 +30,9 @@ const Input = styled.input`
   font-size: 1.3rem;
   font-family: "Noto Sans KR", sans-serif;
 
+  width: 70vw;
+  max-width: 30rem;
+
   padding: 0.5rem 0.5rem;
 `;
 

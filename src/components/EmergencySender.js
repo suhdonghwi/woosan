@@ -1,10 +1,11 @@
 import FCM from "fcm-push";
+import keys from "../assets/keys.json";
 
 export default class EmergencySender {
   constructor() {
     // You need to set these to actually run woosan
-    this.serverKey = "";
-    this.clientKey = "";
+    this.serverKey = keys.serverKey;
+    this.clientKey = keys.clientKey;
 
     this.fcm = new FCM(this.serverKey);
   }
@@ -35,7 +36,7 @@ export default class EmergencySender {
           }
         };
 
-        this.fcm.send(pushData, function(err, response) {
+        this.fcm.send(pushData, function (err, response) {
           if (err) {
             console.error("Push메시지 발송에 실패했습니다.");
             console.error(err);

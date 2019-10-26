@@ -14,6 +14,8 @@ const Container = styled.div`
   flex-direction: column;
 
   align-items: center;
+
+  margin-bottom: 3rem;
 `;
 
 const Logo = styled.img`
