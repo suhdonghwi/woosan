@@ -1,17 +1,17 @@
-import FCM from "fcm-push";
-import keys from "../assets/keys.json";
+//import FCM from "fcm-push";
+//import keys from "../assets/keys.json";
 
 export default class EmergencySender {
   constructor() {
     // You need to set these to actually run woosan
-    this.serverKey = keys.serverKey;
+    /*this.serverKey = keys.serverKey;
     this.clientKey = keys.clientKey;
 
-    this.fcm = new FCM(this.serverKey);
+    this.fcm = new FCM(this.serverKey);*/
   }
 
   send(body) {
-    navigator.geolocation.getCurrentPosition(
+    /*navigator.geolocation.getCurrentPosition(
       position => {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
@@ -53,6 +53,8 @@ export default class EmergencySender {
       {
         enableHighAccuracy: true
       }
-    );
+    );*/
+
+    console.log("인식 되었습니다.");
   }
 }
