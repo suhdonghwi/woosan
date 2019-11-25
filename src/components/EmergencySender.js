@@ -1,5 +1,6 @@
 //import FCM from "fcm-push";
 //import keys from "../assets/keys.json";
+import Swal from 'sweetalert2'
 
 export default class EmergencySender {
   constructor() {
@@ -56,5 +57,6 @@ export default class EmergencySender {
     );*/
 
     console.log("인식 되었습니다.");
+    Swal.fire('인식 되었습니다.');
   }
 }
