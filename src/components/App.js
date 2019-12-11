@@ -9,6 +9,9 @@ import RecordHelper from "../classes/RecordHelper";
 import KeywordForm from "./KeywordComponents/KeywordForm";
 import EmergencySender from "./EmergencySender";
 
+import Swal from 'sweetalert2'
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,9 +58,37 @@ export default class App extends React.Component {
     this.startRecognition();
   }
 
+  checkDetection(input, keys) {
+    var requestor = new XMLHttpRequest();
+
+    console.log(input);
+    console.log(keys);
+
+    requestor.onreadystatechange = function() {
+      if (this.readyState !== 4) return;
+
+      if (this.status === 200) {
+        const data = JSON.parse(this.responseText);
+        console.log(data)
+        if (data.detected) {
+          Swal.fire('인식되었습니다.');
+        }
+      }
+    }
+
+    requestor.open("POST", 'http://127.0.0.1:5000/api/similar-sentences', true);
+    requestor.setRequestHeader('Content-Type', 'application/json');
+    requestor.send(JSON.stringify({
+      input: input,
+      keys: keys
+    }));
+  }
+
   startRecognition() {
     this.recognizer.start(async text => {
-      for (var i = 0; i < this.state.keywords.length; i++) {
+      if (text === "") return;
+      this.checkDetection(text, this.state.keywords.map(keyword => keyword.content) );
+      /*for (var i = 0; i < this.state.keywords.length; i++) {
         if (text.replace(/ /g, "").includes(this.state.keywords[i].content)) {
           this.emergencySender.send("OO님이 위험에 처했습니다.");
 
@@ -65,7 +96,7 @@ export default class App extends React.Component {
           this.downloadFile(blob, new Date().toDateString());
           return;
         }
-      }
+      }*/
     });
   }
 
